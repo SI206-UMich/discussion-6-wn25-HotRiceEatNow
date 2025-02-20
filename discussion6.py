@@ -17,6 +17,20 @@ def load_csv(f):
 
     base_path = os.path.abspath(os.path.dirname(__file__))
     full_path = os.path.join(base_path, f)
+    
+    data = {}
+    with open(full_path, newline='', encoding='utf-8') as csvfile:
+        reader = csv.reader(csvfile)
+        headers = next(reader)  #rRead the first row as headers
+        for row in reader:
+            year = row[0]  
+            if year not in data:
+                data[year] = {}
+            for month, value in zip(headers[1:], row[1:]):  # th rest of columns are months
+                data[year][month] = value  # keep values as strings
+                
+    return data
+
     # use this 'full_path' variable as the file that you open
 
 def get_annual_max(d):
