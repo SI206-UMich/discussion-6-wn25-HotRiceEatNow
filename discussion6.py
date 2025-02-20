@@ -1,6 +1,6 @@
 import unittest
 import os
-
+import csv
 
 def load_csv(f):
     '''
@@ -23,14 +23,14 @@ def load_csv(f):
         reader = csv.reader(csvfile)
         headers = next(reader)  #rRead the first row as headers
         for row in reader:
-            year = row[0]  
-            if year not in data:
-                data[year] = {}
-            for month, value in zip(headers[1:], row[1:]):  # th rest of columns are months
+            month = row[0]
+            for year, value in zip(headers[1:], row[1:]):
+                if year not in data:
+                    data[year] = {}
                 data[year][month] = value  # keep values as strings
                 
     return data
-
+                
     # use this 'full_path' variable as the file that you open
 
 def get_annual_max(d):
@@ -45,7 +45,7 @@ def get_annual_max(d):
     Note: Don't strip or otherwise modify strings. Do not change datatypes except where necessary.
         You'll have to change vals to int to compare them. 
     '''
-     max_list = []
+    max_list = []
     for year, months in d.items():
         max_month = max(months, key=lambda m: int(months[m]))  # finidng month with max value
         max_value = int(months[max_month])
