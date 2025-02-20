@@ -45,7 +45,7 @@ def get_annual_max(d):
     Note: Don't strip or otherwise modify strings. Do not change datatypes except where necessary.
         You'll have to change vals to int to compare them. 
     '''
-    max_list = []
+     max_list = []
     for year, months in d.items():
         max_month = max(months, key=lambda m: int(months[m]))  # finidng month with max value
         max_value = int(months[max_month])
